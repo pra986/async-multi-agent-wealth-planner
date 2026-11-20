@@ -1,0 +1,36 @@
+[
+  {
+    "id": "eval-001",
+    "name": "happy_path_balanced_portfolio",
+    "user_id": "user_clerk_alpha",
+    "positions": [
+      {"symbol": "VTI", "asset_class": "Equities", "market_value": 60000.0},
+      {"symbol": "BND", "asset_class": "Fixed Income", "market_value": 30000.0},
+      {"symbol": "SGOV", "asset_class": "Cash", "market_value": 10000.0}
+    ],
+    "expected_job_status": "COMPLETE",
+    "expected_chart_sum": 100.0
+  },
+  {
+    "id": "eval-002",
+    "name": "cross_user_polling_forbidden",
+    "owner_user_id": "user_clerk_alpha",
+    "polling_user_id": "user_clerk_beta",
+    "expected_http_status": 403
+  },
+  {
+    "id": "eval-003",
+    "name": "duplicate_sqs_delivery_idempotent",
+    "user_id": "user_clerk_alpha",
+    "sqs_message_id": "sqs-msg-dup-001",
+    "expected_reexecuted_stages": []
+  },
+  {
+    "id": "eval-004",
+    "name": "charter_failure_marks_job_partial",
+    "user_id": "user_clerk_alpha",
+    "simulate_failure": "charter",
+    "expected_job_status": "PARTIAL",
+    "expected_failed_stage": "charter"
+  }
+]
